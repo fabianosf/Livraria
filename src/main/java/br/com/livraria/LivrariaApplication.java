@@ -10,12 +10,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import br.com.livraria.model.Cliente;
 import br.com.livraria.model.Endereco;
+import br.com.livraria.model.Item;
 import br.com.livraria.model.Login;
+import br.com.livraria.model.Pedido;
 import br.com.livraria.model.Telefone;
 import br.com.livraria.model.Tipo;
 import br.com.livraria.repository.ClienteRepository;
 import br.com.livraria.repository.EnderecoRepository;
+import br.com.livraria.repository.ItemRepository;
 import br.com.livraria.repository.LoginRepository;
+import br.com.livraria.repository.PedidoRepository;
 import br.com.livraria.repository.TelefoneRepository;
 /**
  *   
@@ -38,6 +42,12 @@ public class LivrariaApplication implements CommandLineRunner{
 	
 	@Autowired
 	private TelefoneRepository telefoneRepository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private ItemRepository itemRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(LivrariaApplication.class, args);
@@ -70,6 +80,8 @@ public class LivrariaApplication implements CommandLineRunner{
 		cliente2.setNome("Paulo");
 		cliente2.setSobrenome("Silva");
 		
+		 
+		
 		Telefone telefone = new Telefone();
 		telefone.setDdd("22");
 		telefone.setTipo(Tipo.CASA);
@@ -79,8 +91,32 @@ public class LivrariaApplication implements CommandLineRunner{
 		telefone.setClientes(clientes);
 		
 		
+		Cliente cli = new Cliente("Pedro", "Silva");
+		List<Cliente>clis = new ArrayList<Cliente>();
+		clis.add(cli);
+		
+		Pedido pedido = new Pedido();
+		pedido.setNome("Livro Java 8");
+		pedido.setClientes(clis);
+		cli.setPedido(pedido);
+		
+		
 				
+		
+		Item item = new Item();
+		item.setNome("Bonus Inteligencia Artificial");
+		List<Item>itens = new ArrayList<Item>();
+		itens.add(item); 
+		
+		item.setPedido(pedido);
+		pedido.setItens(itens);
+		
+		
+		
+		pedidoRepository.save(pedido);	
+		itemRepository.save(item);
 		clienteRepository.save(cliente);
+		
 		enderecoRepository.save(endereco);
 		loginRepository.save(login);
 		telefoneRepository.save(telefone);

@@ -52,7 +52,7 @@ public class ClienteController {
 		return new ResponseEntity<Cliente>(savedCliente, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/greetings/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/clientes/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Cliente> updateCliente(@PathVariable("id") Long id, @RequestBody Cliente cliente) {
 		Cliente updatedCliente = null;
 		if (cliente != null && id == cliente.getId()) {

@@ -17,8 +17,7 @@ import javax.persistence.Table;
 
 /**
  * 
- * @author Fabiano Freitas 
- * email: fabiano.freitas@gmail.com
+ * @author Fabiano Freitas email: fabiano.freitas@gmail.com
  *
  */
 @Entity
@@ -39,6 +38,9 @@ public class Cliente implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "telefone_id")
 	private Telefone telefone;
+	@ManyToOne
+	@JoinColumn(name = "pedido_id")
+	private Pedido pedido;
 
 	public Cliente() {
 
@@ -96,6 +98,14 @@ public class Cliente implements Serializable {
 
 	public void setTelefone(Telefone telefone) {
 		this.telefone = telefone;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
 	@Override

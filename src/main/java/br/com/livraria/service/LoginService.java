@@ -10,7 +10,6 @@ import br.com.livraria.model.Login;
    email: fabiano.freitas@gmail.com  	
  *
  */
-
 public interface LoginService {
 	
 	Collection<Login> findAll();
